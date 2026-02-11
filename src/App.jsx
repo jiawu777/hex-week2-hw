@@ -58,8 +58,10 @@ if(token){
 axios.defaults.headers.common['Authorization'] = token;
 
 try{
-    const res = await axios.post(`${API_BASE}/api/user/check`)
-    console.log(res.data);
+    const res = await axios.post(`${API_BASE}/api/user/check`);
+    if(res.data.success){
+  alert("登入驗證成功");
+    }
   }catch(error){
     console.log(error.response);
   }
@@ -72,7 +74,6 @@ try{
 const getProducts = async()=>{
   try{
   const res = await axios.get(`${API_BASE}/api/${API_PATH}/admin/products`);
-  console.log("成功取得商品清單：",res.data);
   setProducts(res.data.products);
   }catch(error){
     console.log("無法取得商品清單：",error.response)
@@ -122,8 +123,7 @@ const getProducts = async()=>{
                       </td>
                       <td>
                         <button className="btn btn-primary" onClick={()=>{
-                           setTempProduct(item);
-                           console.log(item)}}>查看細節</button>
+                           setTempProduct(item);}}>查看細節</button>
                       </td>
                     </tr>
                   ))}
